@@ -30,11 +30,11 @@ namespace Book.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        [HttpPost]
-        public ActionResult Delete(int bookid)
+
+        public ActionResult Delete(int bookid=0)
         {
-            var BOOKID = db.BookData.Where(m => m.BOOK_ID == bookid).FirstOrDefault();
-            db.BookData.Remove(BOOKID);
+            var did = db.BookData.Where(m => m.BOOK_ID == bookid).FirstOrDefault();
+            db.BookData.Remove(did);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
