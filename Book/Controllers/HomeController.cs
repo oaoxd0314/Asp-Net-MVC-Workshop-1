@@ -33,22 +33,24 @@ namespace Book.Controllers
         [HttpPost]
         public ActionResult Delete(int bookid)
         {
-            var DBookDatas = db.BookData.Where(m => m.BOOK_ID == bookid).FirstOrDefault();
-            db.BookData.Remove(DBookDatas);
+            var BOOKID = db.BookData.Where(m => m.BOOK_ID == bookid).FirstOrDefault();
+            db.BookData.Remove(BOOKID);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
-        public ActionResult Edit(int bookid)
+        public ActionResult Edit(int bookid=0)
         {
-            var EBookDatas = db.BookData.Where(m => m.BOOK_ID == bookid).FirstOrDefault();
-            return View(EBookDatas);
+            var book_id = db.BookData.Where(m => m.BOOK_ID == bookid).FirstOrDefault();
+            return View(book_id);
         }
+
         [HttpPost]
         public ActionResult Edit(BookData eBookData)
         {
             DateTime thisDay = DateTime.Today;
             int bookid = eBookData.BOOK_ID;
+
             var Datas = db.BookData.Where(m => m.BOOK_ID == bookid).FirstOrDefault();
 
             Datas.BOOK_NAME = eBookData.BOOK_NAME;
