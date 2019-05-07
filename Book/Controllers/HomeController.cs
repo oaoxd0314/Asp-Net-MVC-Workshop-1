@@ -30,7 +30,7 @@ namespace Book.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        [HttpPost]
         public ActionResult Delete(int bookid)
         {
             var DBookDatas = db.BookData.Where(m => m.BOOK_ID == bookid).FirstOrDefault();
@@ -44,7 +44,7 @@ namespace Book.Controllers
             var EBookDatas = db.BookData.Where(m => m.BOOK_ID == bookid).FirstOrDefault();
             return View(EBookDatas);
         }
-
+        [HttpPost]
         public ActionResult Edit(BookData eBookData)
         {
             DateTime thisDay = DateTime.Today;

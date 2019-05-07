@@ -16,6 +16,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().BOOK_ID)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().BOOK_NAME)
         </th>
         <th>
@@ -39,55 +42,57 @@
         <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().BOOK_KEEPER)
         </th>
-       
-        
+
+
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BOOK_NAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BOOK_CLASS_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BOOK_AUTHOR)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BOOK_BOUGHT_DATE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BOOK_PUBLISHER)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BOOK_NOTE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BOOK_STATUS)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BOOK_KEEPER)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CREATE_DATE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CREATE_USER)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MODIFY_DATE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MODIFY_USER)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { BOOK_ID=item.BOOK_ID }) |
-            @Html.ActionLink("Details", "Details", new { BOOK_ID=item.BOOK_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { BOOK_ID=item.BOOK_ID })
-        </td>
-    </tr>
+<tr>
+    <th>
+        @Html.DisplayFor(modelItem => item.BOOK_ID)
+    </th>
+    <td>
+        @Html.DisplayFor(modelItem => item.BOOK_NAME)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BOOK_CLASS_ID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BOOK_AUTHOR)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BOOK_BOUGHT_DATE)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BOOK_PUBLISHER)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BOOK_NOTE)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BOOK_STATUS)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BOOK_KEEPER)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CREATE_DATE)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CREATE_USER)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MODIFY_DATE)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MODIFY_USER)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { BOOK_ID = item.BOOK_ID }) |
+        @Html.ActionLink("Delete", "Delete", new { BOOK_ID = item.BOOK_ID })
+    </td>
+</tr>
 }
 
 </table>
