@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Book.Models.BookData>
+
+
+@using (Html.BeginForm("search", "Home", FormMethod.Get))
+{
+    @Html.TextBox("searching") <button type="submit" class="btn btn-success">搜尋書名</button>
+}
+<table class="table table-striped">
+    <thead>
+        <tr>
+
+            <td><h4><b>類別</b></h4></td>
+            <td><h4><b>書名</b></h4></td>
+            <td><h4><b>購書日期</b></h4></td>
+            <td><h4><b>借閱狀態</b></h4></td>
+            <td>
+                <h4><b>借閱人</b></h4>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="8" style="color:red">
+                    <h2>ERROR MESSAGE: There is no matching data for your query.</h2>
+                </td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@item.BOOK_CLASS_ID</td>
+                    <td>@item.BOOK_NAME</td>
+                    <td>@item.BOOK_BOUGHT_DATE</td>
+                    <td>@item.BOOK_STATUS</td>
+                    <td>@item.BOOK_KEEPER</td>
+                    <td>
+                        <a href="@Url.Action( "Edit", new { Book_id =item.BOOK_ID })" class="btn btn-warning">編輯</a>
+                        <a onclick="return confirm('確定刪除嗎?');" href="@Url.Action( "Delete", new { aid = item.BOOK_ID })" class="btn btn-danger">刪除</a>
+                    </td>
+                </tr>
+            }
+
+        }
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </tbody>
+    
+</table>
