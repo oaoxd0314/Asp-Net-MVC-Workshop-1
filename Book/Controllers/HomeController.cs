@@ -11,67 +11,57 @@ namespace Book.Controllers
     {
         DataBaseEntities db = new DataBaseEntities();
         // GET: Home
-        public ActionResult Index()
+        public ActionResult Index(string searching)
         {
-            var HBookData = db.BookData.OrderBy(m => m.BOOK_ID).ToList();
-            return View(HBookData);
+            var SearchData = db.BookData.OrderBy(m => m.BOOK_ID).ToList();
+            var book = db.BookData.Where(x => x.BOOK_NAME.Contains(searching) || searching == null).ToList();
+            return View(book);
         }
-
-        public ActionResult Creat()
+        public ActionResult Create()
         {
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Create(BookData data)
+        {
+            db.BookData.Add(data);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
+
+        public ActionResult Delete (int BOOK_ID)
+        {
+            var data = db.BookData.Where(m => m.BOOK_ID == BOOK_ID).FirstOrDefault();
+            db.BookData.Remove(data);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int BOOK_ID)
+        {
+            return View();
+        }
 
         [HttpPost]
-        public ActionResult Creat(BookData CBookData)
+        public ActionResult Edit(BookData data)
         {
-            db.BookData.Add(CBookData);
+            var time = DateTime.Today;
+            int id = data.BOOK_ID;
+            var bookdata = db.BookData.Where(m => m.BOOK_ID == id).FirstOrDefault();
+            bookdata.BOOK_AUTHOR = data.BOOK_AUTHOR;
+            bookdata.BOOK_BOUGHT_DATE = data.BOOK_BOUGHT_DATE;
+            bookdata.BOOK_CLASS_ID = data.BOOK_CLASS_ID;
+            bookdata.BOOK_KEEPER = data.BOOK_KEEPER;
+            bookdata.BOOK_NAME= data.BOOK_NAME;
+            bookdata.BOOK_NOTE= data.BOOK_NOTE;
+            bookdata.BOOK_PUBLISHER= data.BOOK_PUBLISHER;
+            bookdata.BOOK_STATUS= "a";
+            bookdata.CREATE_DATE = time;
+
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        public ActionResult Delete(int bookid=0)
-        {
-            var did = db.BookData.Where(m => m.BOOK_ID == bookid).FirstOrDefault();
-            db.BookData.Remove(did);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult Edit(int bookid=0)
-        {
-            var book_id = db.BookData.Where(m => m.BOOK_ID == bookid).FirstOrDefault();
-            return View(book_id);
-        }
-
-        [HttpPost]
-        public ActionResult Edit(BookData eBookData)
-        {
-            DateTime thisDay = DateTime.Today;
-            int bookid = eBookData.BOOK_ID;
-
-            var Datas = db.BookData.Where(m => m.BOOK_ID == bookid).FirstOrDefault();
-
-            Datas.BOOK_NAME = eBookData.BOOK_NAME;
-            Datas.BOOK_AUTHOR = eBookData.BOOK_AUTHOR;
-            Datas.BOOK_PUBLISHER = eBookData.BOOK_PUBLISHER;
-            Datas.BOOK_NOTE = eBookData.BOOK_NOTE;
-            Datas.BOOK_BOUGHT_DATE = eBookData.BOOK_BOUGHT_DATE;
-            Datas.BOOK_CLASS_ID = eBookData.BOOK_CLASS_ID;
-            Datas.BOOK_STATUS = eBookData.BOOK_STATUS;
-            Datas.BOOK_KEEPER = eBookData.BOOK_KEEPER;
-            Datas.MODIFY_DATE = thisDay;
-            Datas.MODIFY_USER = eBookData.MODIFY_USER;
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult search(string searching)
-        {
-            //show Book_data 內的資料 遞減排序
-            var book = db.BookData.Where(x => x.BOOK_NAME.Contains(searching) || searching == null).ToList();
-            return View(book);
         }
 
     }
