@@ -1,46 +1,30 @@
 ﻿@model IEnumerable<Book.Models.BookData>
 
 @{
-    ViewBag.Title = "暫時的畫面";
+    ViewBag.Title = "查詢";
 }
 
-<h2>Index</h2>
+<h2>暫時</h2>
 
-<form id="search">
 
     @using (Html.BeginForm("search", "Home", FormMethod.Get))
     {
-        @Html.TextBox("searching") <button type="submit" class="btn btn-success">搜尋書名</button>
+<p>
+    書名: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+    <br>
+    圖書類別:@Html.DropDownList("BookClassNameList", (IEnumerable<SelectListItem>)ViewBag.ClassNameList)
+    <br>
+    借閱人:@Html.DropDownList("BookKeeperList", (IEnumerable<SelectListItem>)ViewBag.KeeperList)
+    <br>
+    借閱狀態: @Html.DropDownList("BookStatusList", (IEnumerable<SelectListItem>)ViewBag.StatusList)
+    <br>
+    <input type="submit" class="btn btn-success" value="搜尋" />
+    <input type="reset" class="btn btn-danger" value="清除" />
+    <input type="button" class="btn btn-primary"  value="新增" />
+</p>
     }
-        <tr>
-            圖書類別:<select>
-                <option>政治</option>
-                <option>經濟</option>
-            </select>
-        </tr><br>
+   
 
-        <tr>
-            借閱人:<select>
-                <option>a</option>
-                <option>b</option>
-            </select>
-        </tr><br>
-
-        <tr>
-            借閱狀態:<select>
-                <option>A</option>
-                <option>B</option>
-                <option>U</option>
-                <option>C</option>
-            </select>
-        </tr><br>
-        <tr>
-            <input type="submit" value="查詢">
-            <input type="reset" value="重製">
-            @Html.ActionLink("新增", "Create")
-        </tr><br>
-
-</form>
 
 <table class="table">
     <tr>

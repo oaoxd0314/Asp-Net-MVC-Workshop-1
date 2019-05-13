@@ -11,10 +11,36 @@ namespace Book.Controllers
     {
         DataBaseEntities db = new DataBaseEntities();
         // GET: Home
-        public ActionResult Index(string searching)
+        public ActionResult Index(string search, string BookStatusList, string BookKeeperList,string BookClassNameList)
         {
             var SearchData = db.BookData.OrderBy(m => m.BOOK_ID).ToList();
-            var book = db.BookData.Where(x => x.BOOK_NAME.Contains(searching) || searching == null).ToList();
+            var book = db.BookData.Where(x => x.BOOK_NAME.Contains(search) || search == null).ToList();
+
+            List<SelectListItem> StatusList = new List<SelectListItem>();
+            StatusList.Add(new SelectListItem { Text = "All", Value = "", Selected = true });
+            StatusList.Add(new SelectListItem { Text = "可以借出", Value = "A" });
+            StatusList.Add(new SelectListItem { Text = "已借出", Value = "B" });
+            StatusList.Add(new SelectListItem { Text = "不可借出", Value = "U" });
+            StatusList.Add(new SelectListItem { Text = "已借出(未領)", Value = "C" });
+
+            ViewBag.StatusList = StatusList;
+
+            List<SelectListItem> KeeperList = new List<SelectListItem>();
+            StatusList.Add(new SelectListItem { Text = "All", Value = "", Selected = true });
+            StatusList.Add(new SelectListItem { Text = "可以借出", Value = "A" });
+            StatusList.Add(new SelectListItem { Text = "已借出", Value = "B" });
+            StatusList.Add(new SelectListItem { Text = "不可借出", Value = "U" });
+            StatusList.Add(new SelectListItem { Text = "已借出(未領)", Value = "C" });
+            ViewBag.KeeperList = KeeperList;
+
+            List<SelectListItem> ClassNameList = new List<SelectListItem>();
+            StatusList.Add(new SelectListItem { Text = "All", Value = "", Selected = true });
+            StatusList.Add(new SelectListItem { Text = "可以借出", Value = "A" });
+            StatusList.Add(new SelectListItem { Text = "已借出", Value = "B" });
+            StatusList.Add(new SelectListItem { Text = "不可借出", Value = "U" });
+            StatusList.Add(new SelectListItem { Text = "已借出(未領)", Value = "C" });
+            ViewBag.ClassNameList = ClassNameList;
+
             return View(book);
         }
         public ActionResult Create()
