@@ -26,19 +26,19 @@ namespace Book.Controllers
             ViewBag.StatusList = StatusList;
 
             List<SelectListItem> KeeperList = new List<SelectListItem>();
-            StatusList.Add(new SelectListItem { Text = "All", Value = "", Selected = true });
-            StatusList.Add(new SelectListItem { Text = "可以借出", Value = "A" });
-            StatusList.Add(new SelectListItem { Text = "已借出", Value = "B" });
-            StatusList.Add(new SelectListItem { Text = "不可借出", Value = "U" });
-            StatusList.Add(new SelectListItem { Text = "已借出(未領)", Value = "C" });
+            KeeperList.Add(new SelectListItem { Text = "All", Value = "", Selected = true });
+            KeeperList.Add(new SelectListItem { Text = "可以借出", Value = "A" });
+            KeeperList.Add(new SelectListItem { Text = "已借出", Value = "B" });
+            KeeperList.Add(new SelectListItem { Text = "不可借出", Value = "U" });
+            KeeperList.Add(new SelectListItem { Text = "已借出(未領)", Value = "C" });
             ViewBag.KeeperList = KeeperList;
 
             List<SelectListItem> ClassNameList = new List<SelectListItem>();
-            StatusList.Add(new SelectListItem { Text = "All", Value = "", Selected = true });
-            StatusList.Add(new SelectListItem { Text = "可以借出", Value = "A" });
-            StatusList.Add(new SelectListItem { Text = "已借出", Value = "B" });
-            StatusList.Add(new SelectListItem { Text = "不可借出", Value = "U" });
-            StatusList.Add(new SelectListItem { Text = "已借出(未領)", Value = "C" });
+            ClassNameList.Add(new SelectListItem { Text = "All", Value = "", Selected = true });
+            ClassNameList.Add(new SelectListItem { Text = "可以借出", Value = "A" });
+            ClassNameList.Add(new SelectListItem { Text = "已借出", Value = "B" });
+            ClassNameList.Add(new SelectListItem { Text = "不可借出", Value = "U" });
+            ClassNameList.Add(new SelectListItem { Text = "已借出(未領)", Value = "C" });
             ViewBag.ClassNameList = ClassNameList;
 
             return View(book);
